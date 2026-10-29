@@ -1,0 +1,130 @@
+---
+import { SITE } from '../config';
+
+const clubTypes = ['Musikverein', 'Feuerwehr', 'Sportverein', 'Chor', 'Kulturverein', 'Anderer Verein'];
+---
+<section id="demo" class="demo">
+  <div class="container section split demo-inner">
+    <div class="stack demo-text">
+      <span class="eyebrow demo-eyebrow">Demo anfragen</span>
+      <h2 class="h2">Sehen Sie selbst, wie einfach Vereinsverwaltung sein kann</h2>
+      <p>
+        Hinterlassen Sie uns Ihre Angaben. Wir melden uns bei Ihnen und zeigen Ihnen den
+        Vereinsordner in einer persönlichen Vorführung.
+      </p>
+      <p class="direct">
+        Lieber direkt schreiben? <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
+      </p>
+    </div>
+
+    <form class="form" action={SITE.formEndpoint} method="POST" data-demo-form>
+      <input type="hidden" name="_subject" value="Neue Demo-Anfrage über vereinsordner.li" />
+      <!-- Honeypot gegen Spam: bleibt für Menschen unsichtbar -->
+      <label class="hp" aria-hidden="true">
+        Bitte leer lassen <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+      </label>
+
+      <label class="field">
+        Name
+        <input type="text" name="name" placeholder="Vor- und Nachname" autocomplete="name" required />
+      </label>
+      <label class="field">
+        E-Mail
+        <input type="email" name="email" placeholder="name@beispiel.li" autocomplete="email" required />
+      </label>
+      <label class="field">
+        Name des Vereins
+        <input type="text" name="verein" placeholder="z. B. Harmoniemusik Musterdorf" required />
+      </label>
+      <label class="field">
+        Art des Vereins
+        <select name="art">
+          {clubTypes.map((t) => <option>{t}</option>)}
+        </select>
+      </label>
+      <label class="field full">
+        Nachricht (optional)
+        <textarea name="nachricht" rows="4" placeholder="Was möchten Sie im Verein besser organisieren?"></textarea>
+      </label>
+      <label class="consent full">
+        <input type="checkbox" name="datenschutz" value="ja" required />
+        <span>
+          Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden. Mehr
+          in der <a href="/datenschutz">Datenschutzerklärung</a>.
+        </span>
+      </label>
+      <button type="submit" class="btn btn-accent btn-lg full submit">Demo anfragen</button>
+      <p class="status full" role="status" aria-live="polite" hidden></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  // Sendet das Formular ohne Seitenwechsel (funktioniert ohne JavaScript als normales POST).
+  const form = document.querySelector<HTMLFormElement>('[data-demo-form]');
+  if (form) {
+    const status = form.querySelector<HTMLParagraphElement>('.status')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      button.disabled = true;
+      button.textContent = 'Wird gesendet …';
+      status.hidden = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (!response.ok) throw new Error(String(response.status));
+        form.reset();
+        status.textContent = 'Vielen Dank! Wir melden uns in Kürze bei Ihnen.';
+        status.dataset.state = 'ok';
+      } catch {
+        status.textContent =
+          'Das hat leider nicht geklappt. Bitte versuchen Sie es später erneut oder schreiben Sie uns eine E-Mail.';
+        status.dataset.state = 'error';
+      } finally {
+        status.hidden = false;
+        button.disabled = false;
+        button.textContent = 'Demo anfragen';
+      }
+    });
+  }
+</script>
+
+<style>
+  .demo { background: var(--c-dark); color: var(--c-on-dark); }
+  .demo-inner { align-items: flex-start; }
+  .demo-text { flex: 1 1 380px; gap: 18px; }
+  .demo-text h2 { color: #fff; }
+  .demo-text p { font-size: 18px; }
+  .demo-eyebrow { color: var(--c-orange); }
+  .direct { font-size: 16px !important; }
+  .direct a { color: var(--c-orange); font-weight: 700; }
+
+  .form {
+    flex: 1 1 460px; min-width: 0; padding: 32px; border-radius: var(--radius-lg);
+    background: var(--c-bg); color: var(--c-ink);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px;
+  }
+  .full { grid-column: 1 / -1; }
+  .field { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700; color: var(--c-dark); }
+  .field input, .field select, .field textarea {
+    min-height: 46px; padding: 0 14px; border-radius: var(--radius-sm);
+    border: 1.5px solid var(--c-input); background: #fff; color: var(--c-ink);
+    font: inherit; font-weight: 500;
+  }
+  .field textarea { padding: 12px 14px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--c-dark); box-shadow: 0 0 0 3px rgb(239 159 39 / 0.35); }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--c-text-soft); }
+  .consent input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--c-dark); flex-shrink: 0; }
+  .submit { font-weight: 800; font-size: 17px; min-height: 54px; }
+  .submit:disabled { opacity: 0.7; cursor: progress; transform: none; }
+  .status { padding: 12px 14px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 600; }
+  .status[data-state='ok'] { background: #e8f3e3; color: #234d17; }
+  .status[data-state='error'] { background: #fbe4dc; color: #7a2410; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+</style>

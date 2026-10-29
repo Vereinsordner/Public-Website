@@ -1,0 +1,32 @@
+---
+// Foto: Bild z. B. als src/assets/team.jpg ablegen und unten das <div class="photo"> ersetzen durch:
+//   import { Image } from 'astro:assets';
+//   import team from '../assets/team.jpg';
+//   <Image src={team} alt="…" class="photo" />
+---
+<section id="ueber-uns" class="container section split">
+  <div class="photo" aria-hidden="true"></div>
+
+  <div class="stack about-text">
+    <span class="eyebrow">Über uns</span>
+    <h2 class="h2">Aus dem Vereinsleben – für das Vereinsleben</h2>
+    <p class="lead">
+      Der Vereinsordner ist aus der Harmoniemusik Eschen entstanden – als geistiger Nachfolger des
+      Vereinsmanagers.
+    </p>
+    <p class="lead">
+      Unser Versprechen: Wir vereinfachen die Verwaltung von Vereinen spürbar. Alle benötigten
+      Informationen sind schnell zur Hand, Übergaben funktionieren problemlos und keine Daten gehen
+      verloren. Die Plattform wächst gemeinsam mit unseren Vereinskunden und entwickelt sich mit ihnen
+      weiter.
+    </p>
+  </div>
+</section>
+
+<style>
+  .photo {
+    flex: 1 1 360px; min-width: 0; aspect-ratio: 4 / 3; border-radius: 24px;
+    background: var(--c-tint); border: 2px dashed #d9b57a; object-fit: cover;
+  }
+  .about-text { flex: 1 1 460px; }
+</style>

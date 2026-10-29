@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+interface Props { title: string }
+const { title } = Astro.props;
+---
+<BaseLayout title={`${title} – Vereinsordner`}>
+  <article class="container legal">
+    <h1>{title}</h1>
+    <slot />
+  </article>
+</BaseLayout>
+
+<style>
+  .legal { max-width: 760px; padding-block: 72px 104px; }
+  .legal h1 { font-size: clamp(34px, 5vw, 46px); letter-spacing: -0.02em; margin-bottom: 32px; }
+  .legal :global(h2) { font-size: 22px; margin: 36px 0 10px; }
+  .legal :global(p), .legal :global(li) { color: var(--c-text-soft); font-size: 17px; }
+  .legal :global(p + p) { margin-top: 12px; }
+  .legal :global(.todo) {
+    padding: 14px 16px; border-radius: 10px; background: var(--c-tint); color: var(--c-label);
+    font-weight: 600; margin-bottom: 24px;
+  }
+</style>

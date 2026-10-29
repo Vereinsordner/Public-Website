@@ -1,0 +1,45 @@
+---
+import { SITE } from '../config';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="/logo.svg" alt="Vereinsordner" width="168" height="40" />
+        <p>Die Software für die Organisation von Vereinen.</p>
+      </div>
+      <div class="footer-cols">
+        <nav aria-label="Produkt">
+          <strong>Produkt</strong>
+          <a href="/#funktionen">Funktionen</a>
+          <a href="/#preise">Preise</a>
+          <a href="/#demo">Demo anfragen</a>
+          <a href={SITE.appUrl}>Anmelden</a>
+        </nav>
+        <nav aria-label="Unternehmen">
+          <strong>Unternehmen</strong>
+          <a href="/#ueber-uns">Über uns</a>
+          <a href="/#demo">Kontakt</a>
+          <a href="/impressum">Impressum</a>
+          <a href="/datenschutz">Datenschutz</a>
+        </nav>
+      </div>
+    </div>
+    <div class="copyright">© {year} Vereinsordner</div>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--c-bg-alt); border-top: 1px solid var(--c-line); }
+  .footer-inner { padding-block: 56px 40px; display: flex; flex-direction: column; gap: 36px; }
+  .footer-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; }
+  .footer-brand { display: flex; flex-direction: column; gap: 12px; max-width: 340px; }
+  .footer-brand img { height: 40px; width: auto; }
+  .footer-brand p { font-size: 15px; color: var(--c-text-soft); }
+  .footer-cols { display: flex; flex-wrap: wrap; gap: 56px; }
+  .footer-cols nav { display: flex; flex-direction: column; gap: 10px; font-size: 15px; }
+  .footer-cols strong { color: var(--c-dark); }
+  .footer-cols a { text-decoration: none; }
+  .copyright { padding-top: 24px; border-top: 1px solid var(--c-border); font-size: 14px; color: var(--c-text-muted); }
+</style>

@@ -1,0 +1,56 @@
+---
+import '@fontsource-variable/plus-jakarta-sans';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const { title = SITE.title, description = SITE.description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
+---
+<!doctype html>
+<html lang="de-LI">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#412402" />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="de_LI" />
+    <!-- TODO: Vorschaubild 1200×630 als public/og-image.png ablegen und Zeile aktivieren -->
+    <!-- <meta property="og:image" content={new URL('/og-image.png', SITE.url).href} /> -->
+  </head>
+  <body>
+    <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+    <Header />
+    <main id="inhalt">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute; left: 16px; top: -60px; z-index: 100;
+    padding: 10px 16px; border-radius: 8px;
+    background: var(--c-dark); color: #fff6e8; font-weight: 700; text-decoration: none;
+  }
+  .skip-link:focus { top: 12px; }
+</style>

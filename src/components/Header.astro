@@ -1,0 +1,53 @@
+---
+import Icon from './Icon.astro';
+import { SITE, NAV } from '../config';
+---
+<header class="header">
+  <div class="container header-inner">
+    <a href="/" class="brand" aria-label="Vereinsordner – Startseite">
+      <img src="/logo.svg" alt="Vereinsordner" width="184" height="44" />
+    </a>
+
+    <nav aria-label="Hauptnavigation" class="nav">
+      {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <div class="actions">
+      <a class="btn btn-outline" href={SITE.appUrl}>
+        <Icon name="login" size={18} />
+        Anmelden
+      </a>
+      <a class="btn btn-accent demo-btn" href="/#demo">Demo anfragen</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgb(255 252 247 / 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--c-line);
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-block: 14px;
+  }
+  .brand img { height: 44px; width: auto; }
+  .nav { display: flex; gap: 28px; font-size: 15px; font-weight: 600; }
+  .nav a { text-decoration: none; }
+  .actions { display: flex; gap: 10px; align-items: center; }
+
+  @media (max-width: 960px) {
+    .header-inner { flex-wrap: wrap; }
+    .nav {
+      order: 3; width: 100%; gap: 22px;
+      overflow-x: auto; padding-bottom: 2px;
+      white-space: nowrap;
+    }
+  }
+  @media (max-width: 520px) {
+    .brand img { height: 36px; }
+    .demo-btn { display: none; } /* auf dem Handy bleibt "Anmelden" sichtbar */
+  }
+</style>

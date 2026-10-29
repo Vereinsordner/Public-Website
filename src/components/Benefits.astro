@@ -1,0 +1,44 @@
+---
+import Icon from './Icon.astro';
+
+const benefits = [
+  {
+    icon: 'package' as const,
+    title: 'Für jede Vereinsgrösse',
+    text: 'Ob 20 oder 2000 Mitglieder: Der Vereinsordner wächst mit Ihrem Verein mit.',
+  },
+  {
+    icon: 'shield' as const,
+    title: 'Daten sicher getrennt',
+    text: 'Die Daten jedes Vereins werden vollständig getrennt von anderen Vereinen gespeichert.',
+  },
+  {
+    icon: 'cloud' as const,
+    title: 'Direkt im Browser',
+    text: 'Keine Installation nötig – einfach anmelden und loslegen, vom Vereinslokal oder von zu Hause.',
+  },
+];
+---
+<section class="container benefits-wrap">
+  <div class="benefits">
+    {benefits.map((b) => (
+      <div class="stack benefit">
+        <Icon name={b.icon} size={28} class="benefit-icon" />
+        <h3>{b.title}</h3>
+        <p>{b.text}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .benefits-wrap { padding-bottom: clamp(64px, 9vw, 104px); }
+  .benefits {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px;
+    padding-top: 48px; border-top: 1px solid var(--c-line);
+  }
+  .benefit { gap: 10px; }
+  .benefit :global(.benefit-icon) { color: var(--c-brown); }
+  .benefit h3 { font-size: 19px; }
+  .benefit p { font-size: 16px; color: var(--c-text-soft); }
+</style>

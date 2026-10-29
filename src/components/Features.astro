@@ -1,0 +1,68 @@
+---
+import Icon from './Icon.astro';
+
+const inventory = [
+  {
+    icon: 'music' as const,
+    title: 'Instrumente',
+    text: 'Wissen, welche Instrumente der Verein besitzt und wem sie aktuell zugeteilt sind.',
+  },
+  {
+    icon: 'shirt' as const,
+    title: 'Uniformen',
+    text: 'Uniformteile und Grössen im Griff – damit vor dem nächsten Auftritt nichts fehlt.',
+  },
+  {
+    icon: 'sheet' as const,
+    title: 'Musiknoten',
+    text: 'Das Notenarchiv digital erfasst: Stücke, Stimmen und Programme auf einen Blick.',
+  },
+];
+---
+<section id="funktionen" class="container section features">
+  <div class="stack intro">
+    <span class="eyebrow">Funktionen</span>
+    <h2 class="h2">Alles, was Ihr Verein verwaltet – an einem Ort</h2>
+    <p class="lead">
+      Schluss mit verstreuten Excel-Listen und Ordnern im Vereinslokal. Der Vereinsordner hält
+      Mitglieder und Inventar zentral und aktuell.
+    </p>
+  </div>
+
+  <div class="grid-auto">
+    <article class="highlight">
+      <span class="icon-tile big"><Icon name="users" size={30} /></span>
+      <div class="stack">
+        <h3>Mitgliederverwaltung</h3>
+        <p>
+          Alle Mitglieder mit Kontaktdaten, Funktionen und Status übersichtlich erfasst – schnell
+          gefunden, einfach aktualisiert und immer auf dem neusten Stand.
+        </p>
+      </div>
+    </article>
+
+    {inventory.map((f) => (
+      <article class="card feature">
+        <span class="icon-tile"><Icon name={f.icon} size={26} /></span>
+        <h3>{f.title}</h3>
+        <p>{f.text}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .features { display: flex; flex-direction: column; gap: 48px; }
+  .intro { max-width: 680px; }
+  .highlight {
+    grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 32px;
+    padding: 36px; border-radius: var(--radius-lg); background: var(--c-dark);
+  }
+  .highlight .stack { flex: 1 1 420px; gap: 8px; }
+  .highlight h3 { font-size: 26px; color: #fff; }
+  .highlight p { font-size: 17px; color: var(--c-on-dark); }
+  .icon-tile.big { width: 64px; height: 64px; border-radius: 16px; background: var(--c-orange); color: var(--c-dark); }
+  .feature { display: flex; flex-direction: column; gap: 14px; padding: 30px; }
+  .feature h3 { font-size: 21px; }
+  .feature p { font-size: 16px; color: var(--c-text-soft); }
+</style>

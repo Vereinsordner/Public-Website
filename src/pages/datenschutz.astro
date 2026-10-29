@@ -1,0 +1,25 @@
+---
+import LegalPage from '../components/LegalPage.astro';
+import { SITE } from '../config';
+---
+<LegalPage title="Datenschutzerklärung">
+  <p class="todo">Vorlage: Struktur zur Orientierung. Bitte vollständig ausformulieren und rechtlich prüfen lassen.</p>
+
+  <h2>Verantwortliche Stelle</h2>
+  <p>[Firmenname, Adresse] – E-Mail: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></p>
+
+  <h2>Hosting</h2>
+  <p>[Hosting-Anbieter, Serverstandort, welche Zugriffsdaten (Server-Logs) gespeichert werden.]</p>
+
+  <h2>Demo-Anfrage über das Kontaktformular</h2>
+  <p>[Welche Daten erhoben werden (Name, E-Mail, Verein, Vereinsart, Nachricht), Zweck, Rechtsgrundlage, Speicherdauer, eingesetzter Formular-Dienst.]</p>
+
+  <h2>Schriftarten</h2>
+  <p>Die Schriftart wird lokal von unserem Server ausgeliefert. Es werden dafür keine Verbindungen zu Drittanbietern aufgebaut.</p>
+
+  <h2>Cookies und Analyse</h2>
+  <p>[Falls Analyse-Tools eingesetzt werden: welche und wie. Aktuell setzt die Website keine Cookies.]</p>
+
+  <h2>Ihre Rechte</h2>
+  <p>[Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch, Datenübertragbarkeit, Beschwerderecht bei der Datenschutzstelle Liechtenstein.]</p>
+</LegalPage>
