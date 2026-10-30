@@ -53,23 +53,6 @@ src/pages/           Seiten: index, impressum, datenschutz, 404
 
 Texte änderst du direkt in der jeweiligen Komponente unter `src/components/`, z. B. `About.astro` für „Über uns“.
 
-## Noch offen (TODO)
-
-- [ ] `formEndpoint` und `contactEmail` in `src/config.ts` prüfen bzw. eintragen
-- [ ] Impressum und Datenschutzerklärung ausfüllen und rechtlich prüfen lassen
-- [ ] Foto für „Über uns“ einsetzen (Anleitung oben in `src/components/About.astro`)
-- [ ] Vorschaubild `public/og-image.png` (1200 × 630 px) erstellen und in `src/layouts/BaseLayout.astro` aktivieren
-- [ ] Optional: Sitemap mit `npx astro add sitemap` ergänzen
-
-## Online stellen
-
-Zum Beispiel mit **Netlify** oder **Cloudflare Pages**:
-
-1. Das Projekt in ein Git-Repository pushen und beim Anbieter verbinden.
-2. Als Build-Befehl `npm run build` und als Ausgabeordner `dist` angeben.
-3. Die Domain `vereinsordner.li` / `www.vereinsordner.li` beim Anbieter hinterlegen und die angezeigten DNS-Einträge bei deinem Domain-Registrar setzen.
-4. `app.vereinsordner.li` bleibt davon unberührt und zeigt weiterhin auf die App.
-
 ## Datenschutz-Hinweis
 
 Die Schrift *Plus Jakarta Sans* wird über das npm-Paket `@fontsource-variable/plus-jakarta-sans` mitgeliefert und vom eigenen Server ausgeliefert. Es gibt also keine Verbindung zu Google Fonts, und die Website setzt keine Cookies.
