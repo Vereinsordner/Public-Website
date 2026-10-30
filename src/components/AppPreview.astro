@@ -1,16 +1,19 @@
 ---
 // Illustrative Vorschau der App (Beispieldaten, kein Screenshot).
-import Icon from './Icon.astro';
-
-const members = [
-  { name: 'Anna Beck', register: 'Klarinette', status: 'Aktiv' },
-  { name: 'Luca Frick', register: 'Trompete', status: 'Aktiv' },
-  { name: 'Mia Kaiser', register: 'Querflöte', status: 'Passiv' },
-  { name: 'Jonas Wolf', register: 'Schlagzeug', status: 'Aktiv' },
+const persons = [
+  { name: 'Beck', firstName: 'Anna', active: true, groups: 'Harmoniemusik' },
+  { name: 'Frick', firstName: 'Luca', active: true, groups: 'Harmoniemusik' },
+  { name: 'Kaiser', firstName: 'Mia', active: false, groups: 'Ehrenmitglied' },
+  { name: 'Wolf', firstName: 'Jonas', active: true, groups: 'Jugendmusik' },
 ];
-const menu = ['Übersicht', 'Mitglieder', 'Instrumente', 'Uniformen', 'Musiknoten'];
+const filters = [
+  { label: 'Status', placeholder: 'Status wählen' },
+  { label: 'Vereinsgruppen', placeholder: 'Vereinsgruppen wählen' },
+  { label: 'Aktivmitglied', placeholder: 'Aktivmitglied wählen' },
+];
+const menu = ['Anlässe', 'Personen', 'Organisationen', 'Instrumente', 'Uniformen', 'Notenarchiv', 'Administration'];
 ---
-<div class="preview" role="img" aria-label="Vorschau der Vereinsordner-App mit einer Mitgliederliste">
+<div class="preview" role="img" aria-label="Vorschau der Vereinsordner-App mit einer Personenliste">
   <div class="backdrop" aria-hidden="true"></div>
 
   <div class="window" aria-hidden="true">
@@ -20,22 +23,44 @@ const menu = ['Übersicht', 'Mitglieder', 'Instrumente', 'Uniformen', 'Musiknote
     </div>
     <div class="body">
       <div class="sidebar">
-        {menu.map((m) => <span class:list={{ active: m === 'Mitglieder' }}>{m}</span>)}
+        {menu.map((m) => <span class:list={{ active: m === 'Personen' }}>{m}</span>)}
       </div>
       <div class="main">
         <div class="main-head">
-          <span class="main-title">Mitglieder</span>
-          <span class="new">+ Neues Mitglied</span>
+          <span class="main-title">Personen</span>
+          <span class="new">+ Neue Person</span>
         </div>
-        <div class="search"><Icon name="search" size={14} /> Suchen …</div>
+
+        <div class="filters">
+          <div class="field search">
+            <span class="label">Suche</span>
+            <span class="input">Name oder Vorname</span>
+          </div>
+          {filters.map((f) => (
+            <div class="field">
+              <span class="label">{f.label}</span>
+              <span class="input select">
+                <span class="placeholder">{f.placeholder}</span>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </span>
+            </div>
+          ))}
+        </div>
+
         <div class="table-wrap">
           <div class="table">
-            <div class="row head"><span>Name</span><span>Register</span><span>Status</span></div>
-            {members.map((m) => (
+            <div class="row head">
+              <span>Name ▲</span><span>Vorname</span><span>Aktivmitglied</span><span>Vereinsgruppen</span>
+            </div>
+            {persons.map((p) => (
               <div class="row">
-                <span class="name">{m.name}</span>
-                <span>{m.register}</span>
-                <span class:list={['pill', { passive: m.status === 'Passiv' }]}>{m.status}</span>
+                <span class="name">{p.name}</span>
+                <span>{p.firstName}</span>
+                <span class:list={['pill', { passive: !p.active }]}>{p.active ? 'Ja' : 'Nein'}</span>
+                <span class="groups">{p.groups}</span>
               </div>
             ))}
           </div>
@@ -80,22 +105,34 @@ const menu = ['Übersicht', 'Mitglieder', 'Instrumente', 'Uniformen', 'Musiknote
     font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 8px;
     background: var(--c-dark); color: #fff6e8; white-space: nowrap;
   }
-  .search {
-    display: flex; align-items: center; gap: 8px; padding: 8px 12px;
-    border: 1px solid var(--c-border); border-radius: 8px; font-size: 12px; color: var(--c-text-muted);
+
+  .filters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 8px; }
+  .field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .field.search { grid-column: 1 / span 2; }
+  .field.search + .field { grid-column-start: 1; } /* Filter in neue Zeile */
+  .label { font-size: 11px; font-weight: 700; color: var(--c-dark); }
+  .input {
+    display: flex; align-items: center; justify-content: space-between; gap: 6px;
+    padding: 7px 10px; border: 1px solid var(--c-border); border-radius: 8px;
+    font-size: 11px; color: var(--c-text-muted); white-space: nowrap; overflow: hidden;
   }
+  .placeholder { overflow: hidden; text-overflow: ellipsis; }
+  .select svg { flex-shrink: 0; }
+
   .table-wrap { overflow-x: auto; }
-  .table { min-width: 300px; font-size: 13px; }
+  .table { min-width: 340px; font-size: 13px; }
   .row {
-    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;
+    display: grid; grid-template-columns: 0.9fr 0.9fr 1fr 1.3fr; gap: 8px;
     padding: 10px 4px; align-items: center; border-bottom: 1px solid #f6eddc;
   }
   .row:last-child { border-bottom: none; }
   .row.head {
-    padding-block: 6px; color: var(--c-text-muted); font-weight: 700; font-size: 11px;
-    text-transform: uppercase; letter-spacing: 0.06em; border-bottom-color: var(--c-line);
+    padding-block: 6px; color: var(--c-dark); font-weight: 700; font-size: 12px;
+    border-bottom-color: var(--c-line);
   }
+  .row span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .name { font-weight: 600; }
+  .groups { color: var(--c-text-soft); }
   .pill {
     justify-self: start; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px;
     background: var(--c-tint); color: var(--c-label);

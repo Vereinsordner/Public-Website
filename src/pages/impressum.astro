@@ -3,27 +3,27 @@ import LegalPage from '../components/LegalPage.astro';
 import { SITE } from '../config';
 ---
 <LegalPage title="Impressum">
-  <p class="todo">Vorlage: Bitte alle Angaben in eckigen Klammern ergänzen und rechtlich prüfen lassen.</p>
-
   <h2>Anbieter</h2>
   <p>
-    [Firmenname und Rechtsform]<br />
-    [Strasse und Hausnummer]<br />
-    [PLZ Ort], Liechtenstein
+    Mathias Marxer <br />
+    {/* [Firmenname und Rechtsform]<br />
+    [Strasse und Hausnummer]<br /> */}
+    9492 Eschen <br />
+    Liechtenstein
   </p>
 
   <h2>Kontakt</h2>
   <p>
     E-Mail: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a><br />
-    Telefon: [Telefonnummer]
+    Telefon: +423 782 16 08
   </p>
 
-  <h2>Vertretungsberechtigte Person(en)</h2>
+  {/* <h2>Vertretungsberechtigte Person(en)</h2>
   <p>[Name(n)]</p>
 
   <h2>Handelsregister</h2>
   <p>[Registernummer, Registergericht / Amt für Justiz]</p>
 
   <h2>Mehrwertsteuer</h2>
-  <p>[MWST-Nummer, falls vorhanden]</p>
+  <p>[MWST-Nummer, falls vorhanden]</p> */}
 </LegalPage>
