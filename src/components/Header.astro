@@ -13,10 +13,17 @@ import { SITE, NAV } from '../config';
     </nav>
 
     <div class="actions">
-      <a class="btn btn-outline" href={SITE.appUrl}>
-        <Icon name="login" size={18} />
-        Anmelden
-      </a>
+      {SITE.appUrl ? (
+        <a class="btn btn-outline" href={SITE.appUrl}>
+          <Icon name="login" size={18} />
+          Anmelden
+        </a>
+      ) : (
+        <button type="button" class="btn btn-outline" disabled title="Bald verfügbar">
+          <Icon name="login" size={18} />
+          Anmelden
+        </button>
+      )}
       <a class="btn btn-accent demo-btn" href="/#demo">Demo anfragen</a>
     </div>
   </div>

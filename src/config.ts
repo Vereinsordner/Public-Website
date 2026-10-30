@@ -2,14 +2,13 @@
 export const SITE = {
   name: 'Vereinsordner',
   url: 'https://www.vereinsordner.li',
-  title: 'Vereinsordner – Vereinsverwaltung, einfach gemacht',
-  description:
-    'Mitglieder, Instrumente, Uniformen und Musiknoten an einem Ort – übersichtlich, sicher und für Vereine jeder Grösse.',
+  title: 'Vereinsordner',
+  description: 'Vereinsverwaltung, einfach gemacht',
 
-  // Login zur Vue-App
-  appUrl: 'https://app.vereinsordner.li',
+  // Login zur Vue-App. Solange leer, ist "Anmelden" deaktiviert.
+  // Später z. B.: appUrl: 'https://app.vereinsordner.li',
+  appUrl: '',
 
-  // TODO: Kontaktadresse prüfen
   contactEmail: 'info@vereinsordner.li',
 
   // TODO: Formular-Endpunkt eintragen (siehe README, z. B. Formspree oder eigenes Backend)
@@ -17,8 +16,8 @@ export const SITE = {
 };
 
 export const NAV = [
-  { href: '/#funktionen', label: 'Funktionen' },
   { href: '/#vereine', label: 'Für wen' },
+  { href: '/#funktionen', label: 'Funktionen' },
   { href: '/#preise', label: 'Preise' },
   { href: '/#ueber-uns', label: 'Über uns' },
 ];

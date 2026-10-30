@@ -1,12 +1,7 @@
 ---
-// Foto: Bild z. B. als src/assets/team.jpg ablegen und unten das <div class="photo"> ersetzen durch:
-//   import { Image } from 'astro:assets';
-//   import team from '../assets/team.jpg';
-//   <Image src={team} alt="…" class="photo" />
+// Ein Foto kann später neben dem Text ergänzt werden (z. B. mit <Image> aus 'astro:assets').
 ---
-<section id="ueber-uns" class="container section split">
-  <div class="photo" aria-hidden="true"></div>
-
+<section id="ueber-uns" class="container section">
   <div class="stack about-text">
     <span class="eyebrow">Über uns</span>
     <h2 class="h2">Aus dem Vereinsleben – für das Vereinsleben</h2>
@@ -24,9 +19,5 @@
 </section>
 
 <style>
-  .photo {
-    flex: 1 1 360px; min-width: 0; aspect-ratio: 4 / 3; border-radius: 24px;
-    background: var(--c-tint); border: 2px dashed #d9b57a; object-fit: cover;
-  }
-  .about-text { flex: 1 1 460px; }
+  .about-text { max-width: 760px; }
 </style>

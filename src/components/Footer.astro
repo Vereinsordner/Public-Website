@@ -15,7 +15,7 @@ const year = new Date().getFullYear();
           <a href="/#funktionen">Funktionen</a>
           <a href="/#preise">Preise</a>
           <a href="/#demo">Demo anfragen</a>
-          <a href={SITE.appUrl}>Anmelden</a>
+          {SITE.appUrl && <a href={SITE.appUrl}>Anmelden</a>}
         </nav>
         <nav aria-label="Unternehmen">
           <strong>Unternehmen</strong>

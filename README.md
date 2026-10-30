@@ -21,7 +21,7 @@ Alle zentralen Werte stehen in **`src/config.ts`**:
 
 | Wert | Bedeutung |
 |---|---|
-| `appUrl` | Ziel des Buttons „Anmelden“ (`https://app.vereinsordner.li`) |
+| `appUrl` | Ziel des Buttons „Anmelden“ – solange leer, ist der Button deaktiviert (später z. B. `https://app.vereinsordner.li`) |
 | `contactEmail` | Kontaktadresse in der Demo-Sektion, im Impressum und in der Datenschutzerklärung |
 | `formEndpoint` | Wohin das Formular „Demo anfragen“ gesendet wird |
 | `title`, `description` | Titel und Beschreibung für Google und für geteilte Links |

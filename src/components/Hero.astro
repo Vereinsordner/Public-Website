@@ -18,9 +18,11 @@ import { SITE } from '../config';
       </a>
       <a class="btn btn-soft btn-lg" href="#funktionen">Funktionen ansehen</a>
     </div>
-    <p class="hero-login">
-      Schon dabei? <a href={SITE.appUrl}>Hier geht's zur Anmeldung</a>
-    </p>
+    {SITE.appUrl && (
+      <p class="hero-login">
+        Schon dabei? <a href={SITE.appUrl}>Hier geht's zur Anmeldung</a>
+      </p>
+    )}
   </div>
 
   <AppPreview />

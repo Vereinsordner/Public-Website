@@ -81,6 +81,8 @@ p { margin: 0; }
 .btn-soft:hover { background: #f8dfb4; color: var(--c-dark); }
 .btn-outline { border-color: var(--c-dark); color: var(--c-dark); background: transparent; }
 .btn-outline:hover { background: var(--c-dark); color: #fff6e8; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+.btn-outline:disabled { background: transparent; color: var(--c-dark); }
 
 /* ---------- Abschnitte ---------- */
 .band { background: var(--c-bg-alt); border-block: 1px solid var(--c-line); }
