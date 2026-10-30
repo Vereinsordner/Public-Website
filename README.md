@@ -26,20 +26,6 @@ Alle zentralen Werte stehen in **`src/config.ts`**:
 | `formEndpoint` | Wohin das Formular „Demo anfragen“ gesendet wird |
 | `title`, `description` | Titel und Beschreibung für Google und für geteilte Links |
 
-## Formular „Demo anfragen“ einrichten
-
-Das Formular schickt seine Daten per `POST` an `formEndpoint`. Ist JavaScript aktiv, wird es ohne Seitenwechsel gesendet und zeigt danach eine Bestätigung an. Es gibt zwei Möglichkeiten:
-
-**A) Formular-Dienst, ganz ohne eigenen Server (am schnellsten)**
-1. Auf [formspree.io](https://formspree.io) ein Formular anlegen.
-2. Die Adresse `https://formspree.io/f/xxxxxx` in `formEndpoint` eintragen.
-3. Die Felder `_subject` (Betreff) und `_gotcha` (Spamschutz) wertet Formspree automatisch aus.
-
-**B) Eigener Endpunkt im Kotlin-Backend**
-- `formEndpoint` auf z. B. `https://app.vereinsordner.li/api/demo-request` setzen.
-- Der Endpunkt nimmt `multipart/form-data` mit den Feldern `name`, `email`, `verein`, `art`, `nachricht` und `datenschutz` an. Ist `_gotcha` ausgefüllt, sollte er die Anfrage verwerfen, weil sie von einem Bot stammt.
-- Er antwortet bei Erfolg mit Status 2xx und muss CORS für `https://www.vereinsordner.li` erlauben.
-
 ## Projektstruktur
 
 ```

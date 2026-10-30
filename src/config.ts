@@ -11,8 +11,7 @@ export const SITE = {
 
   contactEmail: 'info@vereinsordner.li',
 
-  // TODO: Formular-Endpunkt eintragen (siehe README, z. B. Formspree oder eigenes Backend)
-  formEndpoint: 'https://formspree.io/f/DEINE-FORMULAR-ID',
+  formEndpoint: 'https://submit-form.com/EZVj9tyWy',
 };
 
 export const NAV = [
